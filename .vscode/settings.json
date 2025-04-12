@@ -1,0 +1,24 @@
+{
+    "makefile.extensionOutputFolder": "./.vscode",
+    "clangd.arguments": [
+        "--compile-commands-dir=${workspaceFolder}/build"
+    ],
+
+    "VsCodeTaskButtons.tasks": [
+        {
+            "label": "$(wrench) Configure",
+            "task": "CMake configure",
+            "tooltip": "Configure the project with CMake"
+        },
+        {
+            "label": "$(tools) Build",
+            "task": "Build",
+            "tooltip": "Build the project"
+        },
+        {
+            "label": "$(trash) Clean",
+            "task": "Clean",
+            "tooltip": "Build the project"
+        }
+    ]
+}

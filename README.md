@@ -1,86 +1,123 @@
-# Simulator project for LVGL embedded GUI Library
+# 基于vscode的LVGL模拟器
+---
+## 一、简介
 
-The [LVGL](https://github.com/lvgl/lvgl) is written mainly for microcontrollers and embedded systems however you can run the library **on your PC** as well without any embedded hardware. The code written on PC can be simply copied when your are using an embedded system.
+在官方仓库的基础上，添加了一些对于我个人更方便的内容。使用的环境为wsl2+ubuntu22.04，其他环境没有尝试过，欢迎添加对不同环境的支持。
 
-Using a PC simulator instead of an embedded hardware has several advantages:
-* **Costs $0** because you don't have to buy or design PCB
-* **Fast** because you don't have to design and manufacture PCB
-* **Collaborative** because any number of developers can work in the same environment
-* **Developer friendly** because much easier and faster to debug on PC
+不同分支包含不同的LVGL版本，其中：
 
-## Requirements
-This project is configured for [VSCode](https://code.visualstudio.com) and only tested on Linux, although this may work on OSx or WSL. It requires a working version of GCC, GDB and make in your path.
+- **v9分支为v9.1.0版本** （默认分支）
+- **v8为v8.3.9版本**
+- 其他分支存放了我个人的练习代码
 
-To allow debugging inside VSCode you will also require a GDB [extension](https://marketplace.visualstudio.com/items?itemName=webfreak.debug) or other suitable debugger. All the requirements have been pre-configured in the [.workspace](simulator.code-workspace) file (simply open the project by doubleclick on this file).
+其中，v8和v9模拟器使用的lvgl版本是官方仓库推荐的，对于同一个大版本（比如v9.1和v9.3）应该只替换lvgl文件夹就行（拉取对应版本的lvgl仓库），替换版本出现可能出现的兼容性问题一般无关痛痒，可以自行解决。
 
-The project can use **SDL** or **X11** as LVGL display driver for lowlevel graphics/mouse/keyboard support. This can be defined in the [Makefile](Makefile#L8).
-Please make sure the selected library is installed in the system (check [Install graphics driver](#install-graphics-driver)).
 
-## Usage
 
-### Get the PC project
-
-Clone the PC project and the related sub modules:
+#### 获取对应版本的模拟器
 
 ```bash
-git clone --recursive https://github.com/lvgl/lv_port_pc_vscode
+git clone https://github.com/YuanHao2054/lvgl_simulator_on_vscode.git #v9版本
+
+git clone -b v8 https://github.com/YuanHao2054/lvgl_simulator_on_vscode.git #v8版本
 ```
 
-### Install graphics driver
-The project can use **SDL** or **X11** as LVGL display driver. This can be selected in the [Makefile](Makefile#L8).
-Please make sure the used library is installed in the system:
+## 二、使用方法
 
-#### Install SDL
-You can download SDL from https://www.libsdl.org/
+v8版本的lvgl模拟器默认用makefile进行工程构建，我都修改为了cmake+ninja的方式，并且添加了vscode快捷任务。
 
-On on Linux you can install it via terminal:
-```bash
-sudo apt-get update && sudo apt-get install -y build-essential libsdl2-dev
-```
+### 1、编译流程
 
-#### Install X11
-On on Linux you can install it via terminal:
-```bash
-sudo apt-get update && sudo apt-get install -y libx11-dev
-```
+通过vscode快捷任务
 
-### Optional library
-There are also FreeType and FFmpeg support. You can install FreeType support with:
-```bash
-# FreeType support
-wget https://kumisystems.dl.sourceforge.net/project/freetype/freetype2/2.13.2/freetype-2.13.2.tar.xz
-tar -xf freetype-2.13.2.tar.xz
-cd freetype-2.13.2
-make
-make install
-```
+![1](./pictures/1.png)
 
-The FFmpeg support can be installed with:
-```bash
-# FFmpeg support
-git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg
-cd ffmpeg
-git checkout release/6.0
-./configure --disable-all --disable-autodetect --disable-podpages --disable-asm --enable-avcodec --enable-avformat --enable-decoders --enable-encoders --enable-demuxers --enable-parsers --enable-protocol='file' --enable-swscale --enable-zlib
-make
-sudo make install
-```
+![2](./pictures/2.png)
 
-And then remove all the comments in the `Makefile` on `INC` and `LDLIBS` lines. \
-They should be for **SDL**:
-```Makefile
-INC    := -I./ui/simulator/inc/ -I./ -I./lvgl/ -I/usr/include/freetype2 -L/usr/local/lib
-LDLIBS := -lSDL2 -lm -lfreetype -lavformat -lavcodec -lavutil -lswscale -lm -lz -lpthread
-```
-They should be for **X11**:
-```Makefile
-INC    := -I./ui/simulator/inc/ -I./ -I./lvgl/ -I/usr/include/freetype2 -L/usr/local/lib
-LDLIBS := -lX11 -lm -lfreetype -lavformat -lavcodec -lavutil -lswscale -lm -lz -lpthread
-```
+(详细任务代码见`./.vscode/tasks.json`)
 
-### Setup
-To allow custom UI code an `lv_conf.h` file placed at `ui/simulator/inc` will automatically override this projects lv_conf.h file. By default code under `ui` is ignored so you can reuse this repository for multiple projects. You will need to place a call from `main.c` to your UI's entry function.
+同时，可以通过安装vscode插件**Task Buttons**来使用任务栏地下的快捷按钮
 
-To build and debug, press F5. You should now have your UI displayed in a new window and can access all the debug features of VSCode through GDB.
+![3](./pictures/3.png)
 
-To allow temporary modification between simulator and device code, a SIMULATOR=1 define is added globally.
+(详细任务代码见`./.vscode/settings.json`)
+
+### 2、调试
+
+在完成调试后，通过vscode的调试功能进行调试
+
+![4](./pictures/4.png)
+
+**效果：**
+
+![5](./pictures/5.png)
+
+
+
+### 3、添加自己的LVGL代码
+
+预留了mygui.c和mygui.h这两个文件作为基础框架
+
+![6](./pictures/6.png)
+
+v9版本的模拟器，需要自己添加其他c文件需要在cmakelists文件中添加它（官方的cmake文件不是通过递归查询的方式添加c文件）
+
+v8版本的模拟器，是我根据makefile重写的cmakelists，使用递归查询的方式，不需要手动添加c文件
+
+![7](./pictures/7.png)
+
+
+
+## 三、以下是我之前存放练习代码的时候写的说明，无需关心
+
+
+
+#### 不同分支存放不同部分的学习代码
+
+#### master、1~6是v9版本的模拟器，v8simulator是v8版本的模拟器
+- **master**   
+    - 默认模板
+- **1_base_obj**  
+    - 基础部件
+- **2_widgets_part1**  
+    - 标签
+    - 按钮
+    - 开个
+    - 复选框
+- **3_widgets_part2**    
+    - 进度条
+    - 加载器
+    - led部件
+    - 列表部件
+- **4_widgets_part3**
+    - 下拉列表
+    - 滚轮
+    - 滑块
+    - 圆弧
+    - 线条
+- **5_widgets_part4**
+    - 图片
+    - 色环
+    - 矩阵按钮
+    - 文本区域
+    - 键盘
+- **6_widgets_part5**
+    - 图片按钮
+    - 选择卡
+    - 平铺视图
+    - 窗口
+- **v8simulator**
+    - 图片按钮
+    - 选择卡
+    - 平铺视图
+    - 窗口
+    - 消息框
+    - 微调器
+    - 表格
+
+
+
+
+### 另外还有分支存放练习例程
+- **practice1-list**  
+列表的练习例程

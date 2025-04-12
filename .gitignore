@@ -1,12 +1,12 @@
-# Ignore build folder
+# 忽略 build/ 和 bin/ 目录
 build/
+bin/
 
-# Ignore UI folder, this should be commited in its own repository
-ui/
+# 忽略 cache 目录
+.cache/
 
-# Ignore all dot folders, with below exceptions
-.*/
-
-# VSCode
-!.vscode/
-!.vscode/*
+# 处理 .vscode 目录
+.vscode/*           
+!.vscode/settings.json  
+!.vscode/tasks.json    
+!.vscode/launch.json   
