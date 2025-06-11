@@ -1,10 +1,4 @@
-#ifndef __MYGUI_H
-#define __MYGUI_H
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
+#pragma once
 
 #include "lvgl/lvgl.h"
 #include "stdio.h"
@@ -12,11 +6,3 @@ extern "C" {
 
 void mygui();
 
-
-// Add your function declarations and other definitions here
-
-#ifdef __cplusplus
-} /* extern "C" */
-#endif
-
-#endif /* MYGUI_H */

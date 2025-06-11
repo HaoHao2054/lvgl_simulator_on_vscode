@@ -1,4 +1,4 @@
-#include "mygui.h"
+#include "ui.h"
 
 void mygui()
 {

@@ -35,16 +35,17 @@ add_subdirectory(lvgl_port)  # Include the LVGL port directory
 # --- Define the project executable ---
 add_executable(${PROJECT_NAME}
     main.cpp
+    config/config.cpp
+    user/ui.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC 
     "${CMAKE_SOURCE_DIR}"    
     "${CMAKE_SOURCE_DIR}/user"
+    "${CMAKE_SOURCE_DIR}/config"
     "${CMAKE_SOURCE_DIR}/lvgl_port/"
     "${CMAKE_SOURCE_DIR}/lvgl_port/lvgl"  # Include LVGL core
     "${CMAKE_SOURCE_DIR}/lvgl_port/lv_drivers"  # Include LVGL drivers
-    
-
 )
 
 # Link against the libraries built in other directories
