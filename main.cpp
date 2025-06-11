@@ -15,7 +15,7 @@
 #include "lvgl/lvgl.h"
 #include "lvgl/examples/lv_examples.h"
 #include "lvgl/demos/lv_demos.h"
-#include "mygui.h"
+#include "ui.h"
 #if USE_SDL
 #define SDL_MAIN_HANDLED /*To fix SDL's "undefined reference to WinMain" issue*/
 #include <SDL2/SDL.h>
@@ -192,7 +192,7 @@ int main(int argc, char **argv)
   //  lv_example_flex_3();
   //  lv_example_label_1();
 
-  //  lv_demo_widgets();
+  lv_demo_widgets();
   //  lv_demo_keypad_encoder();
   //  lv_demo_benchmark();
   //  lv_demo_stress();
@@ -200,7 +200,7 @@ int main(int argc, char **argv)
 
   //  user_image_demo();
 
-   mygui();
+   // mygui();
 
   while (1)
   {

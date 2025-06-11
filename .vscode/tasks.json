@@ -45,7 +45,6 @@
             "command": "cmake",
             "args": [
                 "--build", "build",
-                "--target", "all"
             ],
             "group": {
                 "kind": "build",
@@ -60,7 +59,7 @@
             "command": "bash",
             "args": [
                 "-c",
-                "rm -rf build bin"
+                "rm -rf build"
             ],
             "group": {
                 "kind": "build",

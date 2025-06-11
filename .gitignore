@@ -1,6 +1,5 @@
 # 忽略 build/ 和 bin/ 目录
 build/
-bin/
 
 # 忽略 cache 目录
 .cache/

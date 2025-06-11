@@ -8,7 +8,6 @@
 
 - **v9分支为v9.1.0版本** （默认分支）
 - **v8为v8.3.9版本**
-- 其他分支存放了我个人的练习代码
 
 其中，v8和v9模拟器使用的lvgl版本是官方仓库推荐的，对于同一个大版本（比如v9.1和v9.3）应该只替换lvgl文件夹就行（拉取对应版本的lvgl仓库），替换版本出现可能出现的兼容性问题一般无关痛痒，可以自行解决。
 
@@ -30,15 +29,15 @@ v8版本的lvgl模拟器默认用makefile进行工程构建，我都修改为了
 
 通过vscode快捷任务
 
-![1](./pictures/1.png)
+![1](https://markdownforyuanhao.oss-cn-hangzhou.aliyuncs.com/img1/202506120002446.png)
 
-![2](./pictures/2.png)
+![2](https://markdownforyuanhao.oss-cn-hangzhou.aliyuncs.com/img1/202506120002685.png)
 
 (详细任务代码见`./.vscode/tasks.json`)
 
 同时，可以通过安装vscode插件**Task Buttons**来使用任务栏地下的快捷按钮
 
-![3](./pictures/3.png)
+![3](https://markdownforyuanhao.oss-cn-hangzhou.aliyuncs.com/img1/202506120002642.png)
 
 (详细任务代码见`./.vscode/settings.json`)
 
@@ -46,11 +45,11 @@ v8版本的lvgl模拟器默认用makefile进行工程构建，我都修改为了
 
 在完成调试后，通过vscode的调试功能进行调试
 
-![4](./pictures/4.png)
+![4](https://markdownforyuanhao.oss-cn-hangzhou.aliyuncs.com/img1/202506120002562.png)
 
 **效果：**
 
-![5](./pictures/5.png)
+![5](https://markdownforyuanhao.oss-cn-hangzhou.aliyuncs.com/img1/202506120002895.png)
 
 
 
@@ -58,66 +57,11 @@ v8版本的lvgl模拟器默认用makefile进行工程构建，我都修改为了
 
 预留了mygui.c和mygui.h这两个文件作为基础框架
 
-![6](./pictures/6.png)
+![6](https://markdownforyuanhao.oss-cn-hangzhou.aliyuncs.com/img1/202506120003669.png)
 
 v9版本的模拟器，需要自己添加其他c文件需要在cmakelists文件中添加它（官方的cmake文件不是通过递归查询的方式添加c文件）
 
 v8版本的模拟器，是我根据makefile重写的cmakelists，使用递归查询的方式，不需要手动添加c文件
 
-![7](./pictures/7.png)
+![7](https://markdownforyuanhao.oss-cn-hangzhou.aliyuncs.com/img1/202506120003594.png)
 
-
-
-## 三、以下是我之前存放练习代码的时候写的说明，无需关心
-
-
-
-#### 不同分支存放不同部分的学习代码
-
-#### master、1~6是v9版本的模拟器，v8simulator是v8版本的模拟器
-- **master**   
-    - 默认模板
-- **1_base_obj**  
-    - 基础部件
-- **2_widgets_part1**  
-    - 标签
-    - 按钮
-    - 开个
-    - 复选框
-- **3_widgets_part2**    
-    - 进度条
-    - 加载器
-    - led部件
-    - 列表部件
-- **4_widgets_part3**
-    - 下拉列表
-    - 滚轮
-    - 滑块
-    - 圆弧
-    - 线条
-- **5_widgets_part4**
-    - 图片
-    - 色环
-    - 矩阵按钮
-    - 文本区域
-    - 键盘
-- **6_widgets_part5**
-    - 图片按钮
-    - 选择卡
-    - 平铺视图
-    - 窗口
-- **v8simulator**
-    - 图片按钮
-    - 选择卡
-    - 平铺视图
-    - 窗口
-    - 消息框
-    - 微调器
-    - 表格
-
-
-
-
-### 另外还有分支存放练习例程
-- **practice1-list**  
-列表的练习例程
