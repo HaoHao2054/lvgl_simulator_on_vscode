@@ -12,22 +12,9 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)             # Enable compile command to 
 add_compile_options(-fdiagnostics-color=always)     # Ninja 
 
 # --- Toolchain Configuration ---
-include(${CMAKE_SOURCE_DIR}/toolchain-x86-gnu.cmake)
-
-# 选择底层驱动（X11或SDL2）
-option(USE_X11 "Use X11 driver" ON)
-option(USE_SDL2 "Use SDL2 driver" OFF)
-
-if(USE_SDL2)
-    set(LV_DRIVER_USE "USE_SDL")
-    set(LIBS_TO_LINK SDL2)
-else()
-    set(LV_DRIVER_USE "USE_X11")
-    set(LIBS_TO_LINK X11)
-endif()
-
-# 添加自定义定义
-add_definitions(-DSIMULATOR=1 -DLV_BUILD_TEST=0 -D${LV_DRIVER_USE})
+include(${CMAKE_SOURCE_DIR}/cmake/toolchain-x86-gnu.cmake)
+# --- Display Drivers Configuration ---
+include(${CMAKE_SOURCE_DIR}/cmake/drivers.cmake) 
 
 # --- Include Directories ---
 add_subdirectory(lvgl_port)  # Include the LVGL port directory
@@ -48,17 +35,16 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     "${CMAKE_SOURCE_DIR}/lvgl_port/lv_drivers"  # Include LVGL drivers
 )
 
-# Link against the libraries built in other directories
+# --- Link Libraries ---
 target_link_directories(${PROJECT_NAME} PRIVATE
     "${CMAKE_BINARY_DIR}/lib"  # Ensure the libraries are found in the build directory
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-    lvgl  # Link against the lvgl library
+    lvgl  
     ${LIBS_TO_LINK}
     pthread
     m
-    
 )
 
 
