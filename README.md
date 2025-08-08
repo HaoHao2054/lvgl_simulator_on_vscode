@@ -48,13 +48,13 @@ git submodule update --init --recursive
 
 具体方法请参考：
 
-- [使用VSCode进行开发调试](https://www.google.com/search?q=./docs/使用vscode开发调试.md&authuser=1)
+- [使用VSCode进行开发调试](/docs/使用vscode开发调试.md)
 
   效果展示：
 
   ![Snipaste_2025-08-08_14-03-39](https://markdownforyuanhao.oss-cn-hangzhou.aliyuncs.com/img1/20250808142437007.png)
 
-- [使用CLion进行开发调试](https://www.google.com/search?q=./docs/使用clion开发调试.md&authuser=1)
+- [使用CLion进行开发调试](./docs/使用clion开发调试.md)
 
   效果展示：
 
