@@ -1,7 +1,7 @@
 {
     "makefile.extensionOutputFolder": "./.vscode",
     "clangd.arguments": [
-        "--compile-commands-dir=${workspaceFolder}/build"
+        "--compile-commands-dir=${workspaceFolder}/build/Debug"
     ],
 
     "VsCodeTaskButtons.tasks": [

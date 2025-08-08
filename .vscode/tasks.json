@@ -29,8 +29,7 @@
             "type": "shell",
             "command": "cmake",
             "args": [
-                "-G", "Ninja",
-                "-B", "build"
+                "--preset", "Debug",
             ],
             "group": {
                 "kind": "build",
@@ -44,7 +43,7 @@
             "type": "shell",
             "command": "cmake",
             "args": [
-                "--build", "build",
+                "--build", "--preset", "Debug",
             ],
             "group": {
                 "kind": "build",

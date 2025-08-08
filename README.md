@@ -1,67 +1,77 @@
-# 基于vscode的LVGL模拟器
----
+# 适用于Linux环境的LVGL模拟器
+
+------
+
 ## 一、简介
 
-在官方仓库的基础上，添加了一些对于我个人更方便的内容。使用的环境为wsl2+ubuntu22.04，其他环境没有尝试过，欢迎添加对不同环境的支持。
+对LVGL官方项目进行了一些整合和修改，以达到开箱即用的目的。添加了使用VSCode和CLion开发调试的配置。
 
-不同分支包含不同的LVGL版本，其中：
+已验证可用的环境有：
 
-- **v9分支为v9.1.0版本** （默认分支）
-- **v8为v8.3.9版本**
+- WSL2 + Ubuntu 22.04
+- VMware + Ubuntu 22.04
+- Fedora 42 KDE Plasma Wayland
 
-其中，v8和v9模拟器使用的lvgl版本是官方仓库推荐的，对于同一个大版本（比如v9.1和v9.3）应该只替换lvgl文件夹就行（拉取对应版本的lvgl仓库），替换版本出现可能出现的兼容性问题一般无关痛痒，可以自行解决。
+*其他环境没有尝试过，欢迎添加对不同环境的支持。*
 
+### 版本说明
 
+| 组件         | 版本           | 备注                   |
+| ------------ | -------------- | ---------------------- |
+| `lvgl`       | `release/v8.3` | 不支持直接更换其他版本 |
+| `lv_drivers` | `release/v8.3` | 不支持直接更换其他版本 |
 
-#### 获取对应版本的模拟器
+## 二、操作指南
+
+### 获取项目
+
+克隆仓库并初始化子模块：
 
 ```bash
-git clone https://github.com/YuanHao2054/lvgl_simulator_on_vscode.git #v9版本
-
-git clone -b v8 https://github.com/YuanHao2054/lvgl_simulator_on_vscode.git #v8版本
+git clone --recursive https://github.com/haoruanwn/lvglsim_linux.git
 ```
 
-## 二、使用方法
+或者分步执行：
 
-v8版本的lvgl模拟器默认用makefile进行工程构建，我都修改为了cmake+ninja的方式，并且添加了vscode快捷任务。
+```bash
+# 1. 克隆本仓库
+git clone https://github.com/haoruanwn/lvglsim_linux.git
 
-### 1、编译流程
+# 2. 进入项目目录并初始化子模块
+cd lvglsim_linux
+git submodule update --init --recursive
+```
 
-通过vscode快捷任务
+### 编译、运行与调试
 
-![1](https://markdownforyuanhao.oss-cn-hangzhou.aliyuncs.com/img1/202506120002446.png)
+本项目已添加VSCode和CLion的配置文件，可直接用于开发和调试。
 
-![2](https://markdownforyuanhao.oss-cn-hangzhou.aliyuncs.com/img1/202506120002685.png)
+具体方法请参考：
 
-(详细任务代码见`./.vscode/tasks.json`)
+- [使用VSCode进行开发调试](https://www.google.com/search?q=./docs/使用vscode开发调试.md&authuser=1)
 
-同时，可以通过安装vscode插件**Task Buttons**来使用任务栏地下的快捷按钮
+  效果展示：
 
-![3](https://markdownforyuanhao.oss-cn-hangzhou.aliyuncs.com/img1/202506120002642.png)
+  ![Snipaste_2025-08-08_14-03-39](https://markdownforyuanhao.oss-cn-hangzhou.aliyuncs.com/img1/20250808142437007.png)
 
-(详细任务代码见`./.vscode/settings.json`)
+- [使用CLion进行开发调试](https://www.google.com/search?q=./docs/使用clion开发调试.md&authuser=1)
 
-### 2、调试
+  效果展示：
 
-在完成调试后，通过vscode的调试功能进行调试
+  ![Snipaste_2025-08-08_14-05-05](https://markdownforyuanhao.oss-cn-hangzhou.aliyuncs.com/img1/20250808142450035.png)
 
-![4](https://markdownforyuanhao.oss-cn-hangzhou.aliyuncs.com/img1/202506120002562.png)
+也可以直接使用命令行进行编译运行：
 
-**效果：**
+```bash
+# 调用预设的配置 (例如 Debug)
+cmake --preset Debug
 
-![5](https://markdownforyuanhao.oss-cn-hangzhou.aliyuncs.com/img1/202506120002895.png)
+# 使用预设进行构建
+cmake --build --preset Debug
+```
 
+## 三、引用与致谢
 
-
-### 3、添加自己的LVGL代码
-
-预留了mygui.c和mygui.h这两个文件作为基础框架
-
-![6](https://markdownforyuanhao.oss-cn-hangzhou.aliyuncs.com/img1/202506120003669.png)
-
-v9版本的模拟器，需要自己添加其他c文件需要在cmakelists文件中添加它（官方的cmake文件不是通过递归查询的方式添加c文件）
-
-v8版本的模拟器，是我根据makefile重写的cmakelists，使用递归查询的方式，不需要手动添加c文件
-
-![7](https://markdownforyuanhao.oss-cn-hangzhou.aliyuncs.com/img1/202506120003594.png)
-
+- **LVGL官方仓库**
+  - [lvgl/lv_drivers](https://github.com/lvgl/lv_drivers.git)
+  - [lvgl/lvgl](https://github.com/lvgl/lvgl.git)

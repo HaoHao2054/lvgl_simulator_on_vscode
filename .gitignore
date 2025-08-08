@@ -9,3 +9,6 @@ build/
 !.vscode/settings.json  
 !.vscode/tasks.json    
 !.vscode/launch.json   
+
+# 处理 .idea 目录
+.idea/

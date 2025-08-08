@@ -5,7 +5,7 @@
             "name": "Debug LVGL demo with gdb",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/bin/lvgl-demo",
+            "program": "${workspaceFolder}/build/Debug/bin/lvgl-demo",
             "args": [],
             "cwd": "${workspaceFolder}",
             "preLaunchTask": "Build",
